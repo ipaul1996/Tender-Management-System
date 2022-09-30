@@ -9,7 +9,7 @@ import com.dao.AdminDaoImpl;
 
 public class GetAllVendorsUseCase {
 	
-	public static void main(String[] args) {
+	public void viewVendors() {
 		
 		AdminDao dao = new AdminDaoImpl();
 		

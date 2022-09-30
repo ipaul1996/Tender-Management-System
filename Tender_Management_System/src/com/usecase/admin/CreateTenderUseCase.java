@@ -8,10 +8,11 @@ import com.dao.AdminDaoImpl;
 
 public class CreateTenderUseCase {
 	
-	public static void main(String[] args) {
+	public void create() {
 		
 		Scanner sc = new Scanner(System.in);
 		
+		try {
 		System.out.println("Enter tender name : ");
 		String tn = sc.nextLine();
 		
@@ -29,6 +30,11 @@ public class CreateTenderUseCase {
 		String result = dao.createTender(tender);
 		
 		System.out.println(result);
+		
+		} catch(Exception e) {
+			
+			System.out.println("Enter valid input");
+		}
 		
 	}
 

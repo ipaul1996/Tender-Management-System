@@ -6,13 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.Exception.AdminException;
+import com.Exception.BidException;
 import com.Exception.TenderException;
 import com.Exception.VendorException;
 import com.bean.Admin;
+import com.bean.Bid;
+import com.bean.BidTenderVendorDTO;
 import com.bean.Tender;
 import com.bean.Vendor;
+import com.usecase.admin.GetAllTendersUseCase;
 import com.utility.DBUtil;
 
 public class AdminDaoImpl implements AdminDao {
@@ -199,6 +204,125 @@ public class AdminDaoImpl implements AdminDao {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public List<BidTenderVendorDTO> tenderWiseBid(int tenderid) throws BidException {
+		
+		List<BidTenderVendorDTO> list = new ArrayList<>();
+				
+		try(Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps =  conn.prepareStatement(" select t.tenderid, t.tendername, b.vendorid, v.name, "
+					+ "b.bidprice from tender t inner join vendor v inner join bid b "
+					+ "on t.tenderid = b.tenderid and b.vendorid = v.vendorid where b.tenderid = ?");
+			
+			ps.setInt(1, tenderid);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				int ti = rs.getInt("tenderid");
+				String tn = rs.getString("tendername");
+				int vi = rs.getInt("vendorid");
+				String vn = rs.getString("name");
+				int bp = rs.getInt("bidprice");
+				
+				BidTenderVendorDTO btvd = new BidTenderVendorDTO(ti, tn, vi, vn, bp);
+				
+				list.add(btvd);
+										
+			}
+			
+			if(list.isEmpty()) {
+				
+				throw new BidException("No bid record found for the specified tenderid");
+			}
+			
+		} catch (SQLException e) {
+			
+			throw new BidException(e.getMessage());
+		}
+		
+		
+		return list;
+	}
+
+	@Override
+	public String assignTender(int tenderid) {
+		
+		String message = "Unable to assign the tender";
+		
+		
+		try(Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps0 = conn.prepareStatement
+					("select status from tender where tenderid = ?");
+			ps0.setInt(1, tenderid);
+			
+			ResultSet rs0 = ps0.executeQuery();
+			
+			if(rs0.next()) {
+				
+				String St = rs0.getString("status");
+				
+				
+				if(St.equals("Not Allocated")) {
+					
+							PreparedStatement ps1 = conn.prepareStatement
+							("select tenderid, vendorid, min(bidprice) from bid  where tenderid = ? group by tenderid");
+							
+							ps1.setInt(1, tenderid);
+							
+							ResultSet rs1 = ps1.executeQuery();
+							
+							if(rs1.next()) {
+								
+								int vi = rs1.getInt("vendorid");
+								
+								PreparedStatement ps2 = conn.prepareStatement
+										("update tender set status = 'Allocated', allocatedvendorid = ? where tenderid = ?");
+								
+								ps2.setInt(1, vi);
+								ps2.setInt(2, tenderid);
+								
+								int x = ps2.executeUpdate();
+								
+								PreparedStatement ps3 = conn.prepareStatement("select name from vendor where vendorid = ?");
+								ps3.setInt(1, vi);
+								
+								ResultSet rs3 = ps3.executeQuery();
+								
+								String name = null;
+								
+								if(rs3.next()) {
+									
+									 name = rs3.getString("name");
+								}
+								
+								if(x > 0) {
+									message = "The tender has been assigned to a vendor."
+											+ "\nAssigned vendor's id is : " + vi 
+											+ "\nAssigned vendor's name is : " + name;
+								} 
+							}
+					
+				} else {
+					
+					message = "The tender is already allocated to a vendor";
+				}
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			
+			message = e.getMessage();
+
+		}
+ 		
+		return message;
 	}
 
 }

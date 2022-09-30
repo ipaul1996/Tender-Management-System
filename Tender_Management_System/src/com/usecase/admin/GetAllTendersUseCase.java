@@ -9,7 +9,7 @@ import com.dao.AdminDaoImpl;
 
 public class GetAllTendersUseCase {
 	
-	public static void main(String[] args) {
+	public void viewTenders() {
 		
 		AdminDao dao = new AdminDaoImpl();
 		
@@ -17,12 +17,16 @@ public class GetAllTendersUseCase {
 			
 			List<Tender> list = dao.showTenderList();
 			
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			
 			list.forEach(t -> {
 				System.out.println("Tender Id : " + t.getTenderid());
 				System.out.println("Tender Name : " + t.getTendername());
 				System.out.println("Base Price : " + t.getBaseprice());
 				System.out.println("Tender Status : " + t.getStatus());
 				System.out.println("Tender Allocated to : " + t.getAllocatedvendorid());
+				
+				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				
 			});
 			

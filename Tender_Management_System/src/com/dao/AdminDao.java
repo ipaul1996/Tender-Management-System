@@ -3,9 +3,11 @@ package com.dao;
 import java.util.List;
 
 import com.Exception.AdminException;
+import com.Exception.BidException;
 import com.Exception.TenderException;
 import com.Exception.VendorException;
 import com.bean.Admin;
+import com.bean.BidTenderVendorDTO;
 import com.bean.Tender;
 import com.bean.Vendor;
 
@@ -20,5 +22,8 @@ public interface AdminDao {
 	public String createTender(Tender tender); 
 	
 	public List<Tender> showTenderList() throws TenderException;
+	
+	public List<BidTenderVendorDTO> tenderWiseBid(int tenderid) throws BidException;
 
+	public String assignTender(int tenderid);
 }

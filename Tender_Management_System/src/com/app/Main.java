@@ -4,6 +4,7 @@ package com.app;
  * 		Project : Tender Management System
  * 
  * 		Developer : Indrajit Paul        
+ * 
  */
 
 public class Main {
@@ -12,6 +13,7 @@ public class Main {
 		
 		System.out.println("Welcome to Tender Management System : ");
 		Options.selectOption();
+		System.out.println("Application Closed..!");
 		
 	}
 

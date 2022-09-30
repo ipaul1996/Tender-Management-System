@@ -9,7 +9,9 @@ import com.dao.VendorDaoImpl;
 
 public class VendorLoginUseCase {
 	
-	public static void main(String[] args) {
+	public Vendor login() {
+		
+		Vendor vendor = null;
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -23,13 +25,16 @@ public class VendorLoginUseCase {
 		
 		try {
 			
-			Vendor vendor = dao.vendorLogin(uname, pass);
+			vendor = dao.vendorLogin(uname, pass);
 			System.out.println("\n-: Welcome " + vendor.getName() + " :-");
 			
 		} catch (VendorException e) {
 			
 			System.out.println(e.getMessage());
 		}
+		
+		
+		return vendor;
 	}
 
 }

@@ -8,7 +8,7 @@ import com.dao.AdminDaoImpl;
 
 public class RegisterVendorUseCase {
 	
-	public static void main(String[] args) {
+	public void register() {
 		
 		
 		Scanner sc = new Scanner(System.in);
