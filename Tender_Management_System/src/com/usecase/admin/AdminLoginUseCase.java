@@ -2,10 +2,10 @@ package com.usecase.admin;
 
 import java.util.Scanner;
 
-import com.Exception.AdminException;
 import com.bean.Admin;
 import com.dao.AdminDao;
 import com.dao.AdminDaoImpl;
+import com.exception.AdminException;
 
 public class AdminLoginUseCase {
 

@@ -2,11 +2,11 @@ package com.usecase.vendor;
 
 import java.util.List;
 
-import com.Exception.BidException;
 import com.bean.BidHist;
 import com.bean.Vendor;
 import com.dao.VendorDao;
 import com.dao.VendorDaoImpl;
+import com.exception.BidException;
 
 public class BidHistoryUseCase {
 	

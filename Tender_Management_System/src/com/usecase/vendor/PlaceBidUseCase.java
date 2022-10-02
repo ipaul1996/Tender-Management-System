@@ -1,10 +1,10 @@
 package com.usecase.vendor;
 
-import com.Exception.BidException;
 import com.bean.Bid;
 import com.bean.Vendor;
 import com.dao.VendorDao;
 import com.dao.VendorDaoImpl;
+import com.exception.BidException;
 
 public class PlaceBidUseCase {
 	

@@ -2,10 +2,10 @@ package com.usecase.vendor;
 
 import java.util.Scanner;
 
-import com.Exception.VendorException;
 import com.bean.Vendor;
 import com.dao.VendorDao;
 import com.dao.VendorDaoImpl;
+import com.exception.VendorException;
 
 public class VendorLoginUseCase {
 	

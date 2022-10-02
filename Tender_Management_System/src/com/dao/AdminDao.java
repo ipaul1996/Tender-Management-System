@@ -2,14 +2,14 @@ package com.dao;
 
 import java.util.List;
 
-import com.Exception.AdminException;
-import com.Exception.BidException;
-import com.Exception.TenderException;
-import com.Exception.VendorException;
 import com.bean.Admin;
 import com.bean.BidTenderVendorDTO;
 import com.bean.Tender;
 import com.bean.Vendor;
+import com.exception.AdminException;
+import com.exception.BidException;
+import com.exception.TenderException;
+import com.exception.VendorException;
 
 public interface AdminDao {
 	

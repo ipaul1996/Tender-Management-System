@@ -2,10 +2,10 @@ package com.usecase.admin;
 
 import java.util.List;
 
-import com.Exception.VendorException;
 import com.bean.Vendor;
 import com.dao.AdminDao;
 import com.dao.AdminDaoImpl;
+import com.exception.VendorException;
 
 public class GetAllVendorsUseCase {
 	

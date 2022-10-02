@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.Exception.BidException;
-import com.Exception.TenderException;
-import com.Exception.VendorException;
 import com.bean.Bid;
 import com.bean.BidHist;
 import com.bean.Tender;
 import com.bean.Vendor;
+import com.exception.BidException;
+import com.exception.TenderException;
+import com.exception.VendorException;
 import com.mysql.cj.protocol.Resultset;
 import com.utility.DBUtil;
 

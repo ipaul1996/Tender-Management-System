@@ -1,4 +1,4 @@
-package com.Exception;
+package com.exception;
 
 public class BidException extends Exception {
 	
